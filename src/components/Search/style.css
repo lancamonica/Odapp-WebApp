@@ -1,0 +1,36 @@
+.search {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+}
+
+.search-input {
+  width: 90%;
+  margin-right: 10px;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.button-search {
+  background-color: #00bfff;
+  border-radius: 05px;
+  border: 1px solid #00bfff;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 17px;
+  padding: 05px 05px;
+  text-decoration: none;
+  margin-left: 05px;
+  margin-top: 10px;
+}
+
+.button-search:hover {
+  background-color: #1e90ff;
+}
+
+.button-search:active {
+  position: relative;
+  top: 1px;
+}
