@@ -32,17 +32,18 @@ function App() {
   }, []);
 
   async function handleAddPatients(data) {
-    const response = await api.post("/patients", data);
-    setPatients([...patients, response.data]);
+    await api.post("/patients", data);
+    setClearSearch(false);
+    setSearchText("");
+    await loadPatients();
   }
 
   async function handleDeletePatient(patientId) {
     await api.delete(`/patient/${patientId}`);
-    const index = patients.findIndex(patient => patient._id === patientId);
-    patients.splice(index, 1);
-    setPatients([...patients]);
-    alert("Paciente excluido com sucesso");
     await loadPatients();
+    alert("Paciente excluido com sucesso");
+    setClearSearch(false);
+    setSearchText("");
   }
 
   async function onClickUpdatePatient(patient) {
@@ -61,6 +62,8 @@ function App() {
 
     await loadPatients();
     setEdit(false);
+    setClearSearch(false);
+    setSearchText("");
     setEditPatient({
       name: "",
       age: "",
@@ -73,7 +76,8 @@ function App() {
   async function searchName() {
     if (searchText !== "") {
       const patient = patients.find(
-        patient => patient.name === searchText.trim()
+        patient =>
+          patient.name.toLowerCase() === searchText.toLowerCase().trim()
       );
       if (patient === undefined) {
         alert("Paciente não encontrado.");
